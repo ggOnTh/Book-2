@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 첫번째 아이디어</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            --accent-color: #007aff; /* Apple Style Blue */
+            --text-main: #1d1d1f; /* Premium Dark Gray */
+            --text-sub: #86868b; /* Soft Gray */
+            --card-bg: rgba(255, 255, 255, 0.7);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: var(--bg-gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fetchIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            padding: 3rem 5rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 0;
+            line-height: 1.2;
+            background: linear-gradient(180deg, #1d1d1f 0%, #434344 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub-message {
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-sub);
+            font-weight: 400;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 122, 255, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 122, 255, 0.3);
+            background: #0066d6;
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        @keyframes fetchIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Ambient background decoration */
+        .ambient-light {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 122, 255, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+            top: -200px;
+            right: -200px;
+            z-index: -1;
+            filter: blur(60px);
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-light"></div>
+    <div class="container">
+        <span class="brand">Innovation</span>
+        <h1 id="main-message">오늘도 힘내세요!</h1>
+        <div class="sub-message">당신의 특별한 하루를 응원합니다</div>
+        <button class="cta-button" id="next-btn">다음 문장 보기</button>
+    </div>
+
+    <script>
+        const themes = [
+            { text: '오늘도 힘내세요!', color: '#007aff', shadow: 'rgba(0, 122, 255, 0.2)' },
+            { text: '오늘도 해냈어요!', color: '#ffcc00', shadow: 'rgba(255, 204, 0, 0.2)' },
+            { text: '조금씩 나아지고 있어요.', color: '#ff9500', shadow: 'rgba(255, 149, 0, 0.2)' },
+            { text: '이대로 계속 가봅시다.', color: '#34c759', shadow: 'rgba(52, 199, 89, 0.2)' }
+        ];
+        
+        let currentIndex = 0;
+        const messageElement = document.getElementById('main-message');
+        const nextBtn = document.getElementById('next-btn');
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % themes.length;
+            const currentTheme = themes[currentIndex];
+            
+            // Re-trigger animation
+            messageElement.parentElement.style.animation = 'none';
+            messageElement.parentElement.offsetHeight; // trigger reflow
+            messageElement.parentElement.style.animation = 'fetchIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+            
+            // Update text and colors
+            messageElement.textContent = currentTheme.text;
+            nextBtn.style.background = currentTheme.color;
+            nextBtn.style.boxShadow = `0 10px 20px ${currentTheme.shadow}`;
+            
+            // Adjust text color for yellow button for better contrast
+            if (currentIndex === 1) {
+                nextBtn.style.color = '#1d1d1f';
+            } else {
+                nextBtn.style.color = '#ffffff';
+            }
+        });
+    </script>
+</body>
+</html>
