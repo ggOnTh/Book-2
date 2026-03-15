@@ -1,34 +1,245 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>내 첫번째 아이디어</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            --accent-color: #007aff; /* Apple Style Blue */
-            --text-main: #1d1d1f; /* Premium Dark Gray */
-            --text-sub: #86868b; /* Soft Gray */
-            --card-bg: rgba(255, 255, 255, 0.7);
+            --bg-gradient: linear-gradient(135deg, #f9fafb 0%, #f0fdf4 100%);
+            --accent-color: #10b981;
+            /* Modern Light Emerald */
+            --secondary-color: #064e3b;
+            /* Deep Forest Green */
+            --text-main: #111827;
+            /* Near Black */
+            --text-sub: #4b5563;
+            /* Medium Gray */
+            --card-bg: rgba(255, 255, 255, 0.8);
         }
 
-        body, html {
+        body,
+        html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             background: var(--bg-gradient);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Noto Sans KR', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .app-header {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .app-header h2 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .app-nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-nav li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: opacity 0.2s ease;
+        }
+
+        .app-nav li a:hover {
+            opacity: 1;
+        }
+
+        .app-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .section-feature {
+            min-height: 80vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            flex-direction: column;
+            padding: 4rem 2rem;
+        }
+
+        .section-reviews {
+            padding: 6rem 2rem;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .section-reviews h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
             color: var(--text-main);
-            -webkit-font-smoothing: antialiased;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+
+        .reviews-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            max-width: 400px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .review-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--accent-color);
+        }
+
+        .review-card p {
+            font-style: normal;
+            line-height: 1.6;
+            color: #4a4a4f;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .review-card .user-name {
+            font-weight: 700;
+            color: var(--text-main);
+            display: block;
+        }
+
+        .app-footer {
+            background-color: #f1f3f5;
+            color: var(--text-sub);
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 10;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 786px) {
+            .app-header {
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1.25rem;
+            }
+
+            .app-nav {
+                justify-content: center;
+                gap: 1.5rem;
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .container {
+                padding: 2.5rem 2rem;
+                margin: 0 1rem;
+            }
+
+            .section-feature {
+                min-height: auto;
+                padding: 5rem 1rem;
+            }
+
+            .section-reviews {
+                padding: 4rem 1rem;
+            }
+
+            .section-reviews h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-nav {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .brand {
+                font-size: 0.8rem;
+            }
+
+            .review-card {
+                padding: 1.5rem;
+            }
+
+            .sub-message {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .cta-button {
+                padding: 1.2rem 3rem;
+                width: 100%;
+                max-width: 280px;
+            }
         }
 
         .container {
@@ -58,7 +269,7 @@
         h1 {
             font-size: 48px;
             font-weight: 700;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.04em;
             margin: 0;
             line-height: 1.2;
             background: linear-gradient(180deg, #1d1d1f 0%, #434344 100%);
@@ -91,9 +302,9 @@
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(0, 122, 255, 0.3);
-            background: #0066d6;
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4);
+            background: var(--secondary-color);
         }
 
         .cta-button:active {
@@ -112,7 +323,7 @@
             position: absolute;
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(0, 122, 255, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
             top: -200px;
             right: -20px;
             z-index: -1;
@@ -120,23 +331,63 @@
         }
     </style>
 </head>
+
 <body>
     <div class="ambient-light"></div>
-    <div class="container">
-        <span class="brand">Innovation</span>
-        <h1 id="main-message">오늘도 힘내세요!</h1>
-        <div class="sub-message">당신의 특별한 하루를 응원합니다</div>
-        <button class="cta-button" id="next-btn">다음 문장 보기</button>
-    </div>
+
+    <header class="app-header">
+        <h2>
+            <svg class="header-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 2L3 14H12V22L22 10H13V2Z" />
+            </svg>
+            나의 첫 서비스
+        </h2>
+        <ul class="app-nav">
+            <li><a href="#">소개</a></li>
+            <li><a href="#">기능</a></li>
+            <li><a href="#">문의</a></li>
+        </ul>
+    </header>
+
+    <main class="app-main">
+        <section class="section-feature">
+            <div class="container">
+                <span class="brand">Innovation</span>
+                <h1 id="main-message">오늘도 힘내세요!</h1>
+                <div class="sub-message">당신의 특별한 하루를 응원합니다</div>
+                <button class="cta-button" id="next-btn">다음 문장 보기</button>
+            </div>
+        </section>
+
+        <section class="section-reviews">
+            <h2>사용자 후기</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <img src="profile1.png" alt="User 1">
+                    <p>"정말 놀라운 서비스입니다! 매일 아침 응원을 받으니 활력이 생겨요. 디자인도 너무 세련됐네요."</p>
+                    <span class="user-name">이영희 님</span>
+                </div>
+                <div class="review-card">
+                    <img src="profile2.png" alt="User 2">
+                    <p>"UI가 직관적이고 보기가 편합니다. 나만의 첫 서비스를 고민하는 분들께 강력 추천해요!"</p>
+                    <span class="user-name">김민수 님</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        &copy; 2025 My Service
+    </footer>
 
     <script>
         const themes = [
-            { text: '오늘도 힘내세요!', color: '#007aff', shadow: 'rgba(0, 122, 255, 0.2)' },
-            { text: '오늘도 해냈어요!', color: '#ffcc00', shadow: 'rgba(255, 204, 0, 0.2)' },
-            { text: '조금씩 나아지고 있어요.', color: '#ff9500', shadow: 'rgba(255, 149, 0, 0.2)' },
-            { text: '이대로 계속 가봅시다.', color: '#34c759', shadow: 'rgba(52, 199, 89, 0.2)' }
+            { text: '오늘도 힘내세요!', color: '#10b981', shadow: 'rgba(16, 185, 129, 0.2)' },
+            { text: '오늘도 해냈어요!', color: '#34d399', shadow: 'rgba(52, 211, 153, 0.2)' },
+            { text: '조금씩 나아지고 있어요.', color: '#059669', shadow: 'rgba(5, 150, 105, 0.2)' },
+            { text: '이대로 계속 가봅시다.', color: '#064e3b', shadow: 'rgba(6, 78, 59, 0.2)' }
         ];
-        
+
         let currentIndex = 0;
         const messageElement = document.getElementById('main-message');
         const nextBtn = document.getElementById('next-btn');
@@ -144,17 +395,17 @@
         nextBtn.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % themes.length;
             const currentTheme = themes[currentIndex];
-            
+
             // Re-trigger animation
             messageElement.parentElement.style.animation = 'none';
             messageElement.parentElement.offsetHeight; // trigger reflow
             messageElement.parentElement.style.animation = 'fetchIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards';
-            
+
             // Update text and colors
             messageElement.textContent = currentTheme.text;
             nextBtn.style.background = currentTheme.color;
             nextBtn.style.boxShadow = `0 10px 20px ${currentTheme.shadow}`;
-            
+
             // Adjust text color for yellow button for better contrast
             if (currentIndex === 1) {
                 nextBtn.style.color = '#1d1d1f';
@@ -164,4 +415,5 @@
         });
     </script>
 </body>
+
 </html>
